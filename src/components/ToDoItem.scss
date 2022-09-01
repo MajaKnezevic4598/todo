@@ -52,6 +52,69 @@
   background-color: $darkWhite;
   border-radius: 6px;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .edit-task {
+    margin-top: 6vh;
+
+    width: 50%;
+
+    &__title {
+      display: flex;
+      align-items: center;
+      & > p {
+        margin-right: 1vw;
+        font-weight: bold;
+      }
+      & > input[type="text"] {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+        outline: none;
+        display: inline-block;
+
+        height: 4vh;
+        font-family: $roboto-font-mono;
+      }
+    }
+
+    &__date {
+      display: flex;
+      margin-top: 3vh;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      padding: 0.5rem 0;
+      & > p {
+        white-space: nowrap;
+        margin-right: 1vw;
+        font-weight: bold;
+      }
+    }
+    &__description {
+      display: flex;
+      margin-top: 3vh;
+      & > p {
+        font-weight: bold;
+      }
+      & > textarea {
+        height: 4rem;
+        width: 15rem;
+        resize: none;
+        margin-left: 1vw;
+      }
+    }
+    &__select {
+      display: flex;
+      margin-top: 3vh;
+      & > p {
+        font-weight: bold;
+        margin-right: 1vw;
+      }
+    }
+  }
 }
 
 .Overlay {
@@ -61,4 +124,16 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.edit-task {
+  display: flex;
+  flex-direction: column;
 }

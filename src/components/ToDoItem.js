@@ -4,10 +4,14 @@ import { FiEdit } from "react-icons/fi";
 import { TiDelete } from "react-icons/ti";
 import { HiCheck } from "react-icons/hi";
 import Modal from "react-modal";
+import { FiX } from "react-icons/fi";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 Modal.setAppElement("#root");
 function ToDoItem({ title, id, setToDo, toDo }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleChacked = () => {
     setToDo(
@@ -50,14 +54,51 @@ function ToDoItem({ title, id, setToDo, toDo }) {
           setModalIsOpen(false);
         }}
       >
-        <h1>ja sam modal</h1>
+        <p>
+          Edit task{" "}
+          <span
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            {title}
+          </span>
+        </p>
+        <section className="edit-task">
+          <div className="edit-task__title">
+            <p>Title:</p>
+            <input type="text" placeholder={title} maxlength="100" />
+          </div>
+          <div className="edit-task__date">
+            <p>Due date:</p>
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+            />
+          </div>
+          <div className="edit-task__description">
+            <p>Description:</p>
+            <textarea maxlength="100" placeholder="...description"></textarea>
+          </div>
+          <div className="edit-task__select">
+            <p>Priority:</p>
+            <select>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="heigh">Heigh</option>
+            </select>
+          </div>
+        </section>
+
         <div
           className="close-modal"
           onClick={() => {
             setModalIsOpen(false);
           }}
         >
-          close
+          <FiX />
         </div>
       </Modal>
     </div>
