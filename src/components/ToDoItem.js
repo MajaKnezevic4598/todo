@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ToDoItem.scss";
 import { FiEdit } from "react-icons/fi";
 import { TiDelete } from "react-icons/ti";
@@ -9,9 +9,19 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 Modal.setAppElement("#root");
-function ToDoItem({ title, id, setToDo, toDo }) {
+function ToDoItem({ task, id, setToDo, toDo }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+
+  const [editState, setEditState] = useState({
+    priority: "",
+    description: "",
+    title: task.title,
+    selectedDate: null,
+  });
+
+  useEffect(() => {
+    console.log(editState);
+  }, [editState]);
 
   const handleChacked = () => {
     setToDo(
@@ -28,9 +38,27 @@ function ToDoItem({ title, id, setToDo, toDo }) {
     setToDo(filtered);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("helloo");
+    setToDo(
+      toDo.map((item) => {
+        return item.id === id
+          ? {
+              ...item,
+              title: editState.title,
+              priority: editState.priority,
+              description: editState.description,
+              selectedDate: editState.selectedDate,
+            }
+          : item;
+      })
+    );
+  };
+
   return (
     <div className="toDo-conteiner">
-      <div className="todo-title">{title}</div>
+      <div className="todo-title">{task.title}</div>
       <div className="todo-icons">
         <div className="check-box" onClick={handleChacked}>
           {" "}
@@ -61,36 +89,62 @@ function ToDoItem({ title, id, setToDo, toDo }) {
               fontWeight: "bold",
             }}
           >
-            {title}
+            {task.title}
           </span>
         </p>
-        <section className="edit-task">
+        <form className="edit-task" onSubmit={handleSubmit}>
           <div className="edit-task__title">
             <p>Title:</p>
-            <input type="text" placeholder={title} maxlength="100" />
+            <input
+              type="text"
+              placeholder={task.title}
+              maxLength="100"
+              value={editState.title}
+              onChange={(e) =>
+                setEditState({ ...editState, title: e.target.value })
+              }
+            />
           </div>
           <div className="edit-task__date">
             <p>Due date:</p>
             <DatePicker
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
+              selected={editState.selectedDate}
+              onChange={(date) =>
+                setEditState({ ...editState, selectedDate: date })
+              }
               dateFormat="dd/MM/yyyy"
               minDate={new Date()}
+              value={
+                task.selectedDate ? task.selectedDate : editState.selectedDate
+              }
             />
           </div>
           <div className="edit-task__description">
             <p>Description:</p>
-            <textarea maxlength="100" placeholder="...description"></textarea>
+            <textarea
+              maxLength="100"
+              placeholder={
+                task.description ? task.description : "...description"
+              }
+              onChange={(e) => {
+                setEditState({ ...editState, description: e.target.value });
+              }}
+            ></textarea>
           </div>
           <div className="edit-task__select">
             <p>Priority:</p>
-            <select>
+            <select
+              onChange={(e) => {
+                setEditState({ ...editState, priority: e.target.value });
+              }}
+            >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="heigh">Heigh</option>
             </select>
           </div>
-        </section>
+          <button className="edit-btn">edit</button>
+        </form>
 
         <div
           className="close-modal"

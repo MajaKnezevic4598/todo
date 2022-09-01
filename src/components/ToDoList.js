@@ -64,6 +64,7 @@ function ToDoList() {
                     id={item.id}
                     setToDo={setToDo}
                     toDo={toDo}
+                    task={item}
                   />
                 );
               })
