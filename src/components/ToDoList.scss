@@ -1,0 +1,64 @@
+@import "../styles/variables";
+
+.todo-conteiner {
+  width: 100%;
+
+  margin-top: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__section {
+    width: 40%;
+    min-height: 60vh;
+
+    background-color: lighten($backgrundColor, 5%);
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 1rem 1.5rem;
+
+    .form {
+      background-color: $darkGray;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0.5rem 0.1rem;
+      input[type="text"] {
+        appearance: none;
+        border: none;
+
+        outline: none;
+        background-color: transparent;
+        display: inline-block;
+        height: 6vh;
+        width: 70%;
+        color: $darkWhite;
+        font-family: $roboto-font-mono;
+        &::placeholder {
+          color: $darkWhite;
+          font-family: $roboto-font-mono;
+          font-style: italic;
+          opacity: 0.4;
+        }
+      }
+      .btn-add {
+        padding: 0.5rem 1rem;
+        font-family: $roboto-font-mono;
+        border-radius: 4px;
+        background-color: #16f4d0;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+
+    .items-list {
+      margin-top: 3vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  }
+}

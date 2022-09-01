@@ -1,0 +1,15 @@
+@import "./variables";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $roboto-font-mono;
+  color: $fontColor;
+  background-color: #aaaba8;
+  //   min-height: 100vh;
+}

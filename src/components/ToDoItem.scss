@@ -1,0 +1,45 @@
+@import "../styles/index.scss";
+
+.toDo-conteiner {
+  width: 100%;
+  background-color: $darkGray;
+  color: $darkWhite;
+  padding: 1rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 2vh;
+  display: flex;
+  align-items: center;
+  .todo-title {
+    width: 75%;
+    font-size: 0.9rem;
+  }
+  .todo-icons {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    .check-box {
+      width: 24px;
+      height: 24px;
+      border: 2px solid $darkWhite;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .checked {
+        color: #16f4d0;
+      }
+    }
+    .edit {
+      font-size: 20px;
+      font-weight: bold;
+      margin-left: auto;
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+    .delete {
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}
